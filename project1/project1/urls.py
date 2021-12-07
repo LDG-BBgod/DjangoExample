@@ -3,6 +3,8 @@ from django.urls import path
 from fcuser.views import index
 from fcuser.views import RegisterView, LoginView
 from product.views import ProductList, ProductCreate, ProductDetail
+from order.views import OrderCreate
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index),
@@ -11,4 +13,5 @@ urlpatterns = [
     path('product/', ProductList.as_view()),
     path('product/create/', ProductCreate.as_view()),
     path('product/<int:pk>/', ProductDetail.as_view()),
+    path('order/create/', OrderCreate.as_view()),
 ]

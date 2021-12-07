@@ -7,3 +7,6 @@ class RegisterForm(forms.Form):
     
     def clean(self):
         cleaned_data = super().clean()
+        quantity = cleaned_data.get('quantity')
+        product = cleaned_data.get('product')
+

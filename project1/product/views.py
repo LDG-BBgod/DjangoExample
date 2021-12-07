@@ -1,7 +1,7 @@
 from typing import List
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import FormView, FormView
+from django.views.generic.edit import FormView
 from .models import Product
 from .forms import RegisterForm
 from order.forms import RegisterForm as OrderForm
