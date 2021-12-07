@@ -14,8 +14,6 @@ class RegisterForm(forms.Form):
         description = cleaned_data.get('description')
         stock = cleaned_data.get('stock')
 
-        print(description)
-
         if name and price and description and stock:
             product = Product(
                 name=name,
