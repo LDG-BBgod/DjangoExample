@@ -5,7 +5,29 @@ from django.views.generic.edit import FormView
 from .models import Product
 from .forms import RegisterForm
 from order.forms import RegisterForm as OrderForm
+from rest_framework import generics, mixins
+from .serializers import ProductSerializer
+
 # Create your views here.
+
+class ProductListAPI(generics.GenericAPIView, mixins.ListModelMixin):
+    serializer_class = ProductSerializer
+
+    def get_queryset(self):
+        return Product.objects.all().order_by('id')
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+class ProductDetailAPI(generics.GenericAPIView, mixins.RetrieveModelMixin):
+    serializer_class = ProductSerializer
+
+    def get_queryset(self):
+        return Product.objects.all().order_by('id')
+
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+
 
 class ProductList(ListView):
     model = Product
@@ -23,5 +45,5 @@ class ProductDetail(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['form'] = OrderForm()
+        context['form'] = OrderForm(self.request)
         return context
